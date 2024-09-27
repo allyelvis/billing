@@ -1,0 +1,1871 @@
+{
+    "_id_": 1,
+    "_type": "App",
+    "features": {
+        "_id_": 2,
+        "_type": "App.Features",
+        "list_": [
+            {
+                "_id_": 3,
+                "_type": "Billing.Client",
+                "autoAcknowledge": {
+                    "_id_": 4,
+                    "_type": "Boolean",
+                    "value_": true
+                },
+                "debug": {
+                    "_id_": 5,
+                    "_type": "Debug"
+                },
+                "name": {
+                    "_id_": 6,
+                    "_type": "String",
+                    "value_": ""
+                },
+                "onPurchasesUpdated": {
+                    "_id_": 7,
+                    "_type": "Sequence",
+                    "list_": [
+                        {
+                            "_id_": 8,
+                            "_type": "Call",
+                            "name": {
+                                "_id_": 9,
+                                "_type": "String",
+                                "value_": "getPurchases"
+                            }
+                        }
+                    ]
+                },
+                "comment": {
+                    "_id_": 10,
+                    "_type": "Comment",
+                    "list_": [],
+                    "text_": "Add 'signatureKey' field to verify the purchases. This will eliminate fraudulent purchases."
+                }
+            },
+            {
+                "_id_": 11,
+                "_type": "Activity",
+                "features": {
+                    "_id_": 12,
+                    "_type": "Activity.Features",
+                    "list_": [
+                        {
+                            "_id_": 13,
+                            "_type": "Variable",
+                            "init": {
+                                "_id_": 14,
+                                "_type": "Null"
+                            },
+                            "name": {
+                                "_id_": 15,
+                                "_type": "String",
+                                "value_": "jsonData"
+                            }
+                        },
+                        {
+                            "_id_": 16,
+                            "_type": "Function",
+                            "name": {
+                                "_id_": 17,
+                                "_type": "String",
+                                "value_": "getProductInfo"
+                            },
+                            "body": {
+                                "_id_": 18,
+                                "_type": "Sequence",
+                                "list_": [
+                                    {
+                                        "_id_": 19,
+                                        "_type": "LocalVariable",
+                                        "init": {
+                                            "_id_": 20,
+                                            "_type": "TextView.GetText",
+                                            "view": {
+                                                "_id_": 21,
+                                                "_type": "Expression",
+                                                "text": {
+                                                    "_id_": 22,
+                                                    "_type": "String",
+                                                    "value_": "views.productType.getCheckedRadioButtonId()"
+                                                }
+                                            }
+                                        },
+                                        "name": {
+                                            "_id_": 23,
+                                            "_type": "String",
+                                            "value_": "type"
+                                        }
+                                    },
+                                    {
+                                        "_id_": 24,
+                                        "_type": "LocalVariable",
+                                        "init": {
+                                            "_id_": 25,
+                                            "_type": "TextView.GetText",
+                                            "view": {
+                                                "_id_": 26,
+                                                "_type": "IdReference",
+                                                "ref": {
+                                                    "_id_": 27,
+                                                    "_type": "String",
+                                                    "value_": "@id\/productID"
+                                                }
+                                            }
+                                        },
+                                        "name": {
+                                            "_id_": 28,
+                                            "_type": "String",
+                                            "value_": "id"
+                                        }
+                                    },
+                                    {
+                                        "_id_": 29,
+                                        "_type": "Billing.GetProduct",
+                                        "debug": {
+                                            "_id_": 30,
+                                            "_type": "Debug"
+                                        },
+                                        "onFailure": {
+                                            "_id_": 31,
+                                            "_type": "Sequence",
+                                            "list_": [
+                                                {
+                                                    "_id_": 32,
+                                                    "_type": "Variable.Set",
+                                                    "name": {
+                                                        "_id_": 33,
+                                                        "_type": "String",
+                                                        "value_": "jsonData"
+                                                    },
+                                                    "value": {
+                                                        "_id_": 34,
+                                                        "_type": "Null"
+                                                    }
+                                                },
+                                                {
+                                                    "_id_": 35,
+                                                    "_type": "TextView.SetText",
+                                                    "view": {
+                                                        "_id_": 36,
+                                                        "_type": "IdReference",
+                                                        "ref": {
+                                                            "_id_": 37,
+                                                            "_type": "String",
+                                                            "value_": "@id\/productMessage"
+                                                        }
+                                                    },
+                                                    "text": {
+                                                        "_id_": 38,
+                                                        "_type": "String",
+                                                        "value_": "Error"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        "sku": {
+                                            "_id_": 39,
+                                            "_type": "LocalVariable.Get",
+                                            "name": {
+                                                "_id_": 40,
+                                                "_type": "String",
+                                                "value_": "id"
+                                            }
+                                        },
+                                        "type": {
+                                            "_id_": 41,
+                                            "_type": "LocalVariable.Get",
+                                            "name": {
+                                                "_id_": 42,
+                                                "_type": "String",
+                                                "value_": "type"
+                                            }
+                                        },
+                                        "onSuccess": {
+                                            "_id_": 43,
+                                            "_type": "Sequence",
+                                            "list_": [
+                                                {
+                                                    "_id_": 44,
+                                                    "_type": "CheckValue",
+                                                    "onOther": {
+                                                        "_id_": 45,
+                                                        "_type": "Sequence",
+                                                        "list_": [
+                                                            {
+                                                                "_id_": 46,
+                                                                "_type": "Variable.Set",
+                                                                "name": {
+                                                                    "_id_": 47,
+                                                                    "_type": "String",
+                                                                    "value_": "jsonData"
+                                                                },
+                                                                "value": {
+                                                                    "_id_": 48,
+                                                                    "_type": "Null"
+                                                                }
+                                                            },
+                                                            {
+                                                                "_id_": 49,
+                                                                "_type": "TextView.SetText",
+                                                                "view": {
+                                                                    "_id_": 50,
+                                                                    "_type": "IdReference",
+                                                                    "ref": {
+                                                                        "_id_": 51,
+                                                                        "_type": "String",
+                                                                        "value_": "@id\/productMessage"
+                                                                    }
+                                                                },
+                                                                "text": {
+                                                                    "_id_": 52,
+                                                                    "_type": "String",
+                                                                    "value_": "Product not found"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    "onNonEmptyString": {
+                                                        "_id_": 53,
+                                                        "_type": "Sequence",
+                                                        "list_": [
+                                                            {
+                                                                "_id_": 54,
+                                                                "_type": "Variable.Set",
+                                                                "name": {
+                                                                    "_id_": 55,
+                                                                    "_type": "String",
+                                                                    "value_": "jsonData"
+                                                                },
+                                                                "value": {
+                                                                    "_id_": 56,
+                                                                    "_type": "LocalVariable.Get",
+                                                                    "name": {
+                                                                        "_id_": 57,
+                                                                        "_type": "String",
+                                                                        "value_": "json"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    "value": {
+                                                        "_id_": 58,
+                                                        "_type": "LocalVariable.Get",
+                                                        "name": {
+                                                            "_id_": 59,
+                                                            "_type": "String",
+                                                            "value_": "json"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_id_": 60,
+                            "_type": "Function",
+                            "name": {
+                                "_id_": 61,
+                                "_type": "String",
+                                "value_": "buyProduct"
+                            },
+                            "body": {
+                                "_id_": 62,
+                                "_type": "Sequence",
+                                "list_": [
+                                    {
+                                        "_id_": 63,
+                                        "_type": "LocalVariable",
+                                        "init": {
+                                            "_id_": 64,
+                                            "_type": "Expression",
+                                            "text": {
+                                                "_id_": 65,
+                                                "_type": "String",
+                                                "value_": "JSON.parse(jsonData)"
+                                            }
+                                        },
+                                        "name": {
+                                            "_id_": 66,
+                                            "_type": "String",
+                                            "value_": "product"
+                                        }
+                                    },
+                                    {
+                                        "_id_": 67,
+                                        "_type": "Billing.Purchase",
+                                        "debug": {
+                                            "_id_": 68,
+                                            "_type": "Debug"
+                                        },
+                                        "sku": {
+                                            "_id_": 69,
+                                            "_type": "Field.Get",
+                                            "name": {
+                                                "_id_": 70,
+                                                "_type": "String",
+                                                "value_": "productId"
+                                            },
+                                            "object": {
+                                                "_id_": 71,
+                                                "_type": "LocalVariable.Get",
+                                                "name": {
+                                                    "_id_": 72,
+                                                    "_type": "String",
+                                                    "value_": "product"
+                                                }
+                                            }
+                                        },
+                                        "type": {
+                                            "_id_": 73,
+                                            "_type": "Field.Get",
+                                            "name": {
+                                                "_id_": 74,
+                                                "_type": "String",
+                                                "value_": "type"
+                                            },
+                                            "object": {
+                                                "_id_": 75,
+                                                "_type": "LocalVariable.Get",
+                                                "name": {
+                                                    "_id_": 76,
+                                                    "_type": "String",
+                                                    "value_": "product"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_id_": 77,
+                            "_type": "Function",
+                            "name": {
+                                "_id_": 78,
+                                "_type": "String",
+                                "value_": "getPurchases"
+                            },
+                            "body": {
+                                "_id_": 79,
+                                "_type": "Sequence",
+                                "list_": [
+                                    {
+                                        "_id_": 80,
+                                        "_type": "Billing.GetPurchases",
+                                        "debug": {
+                                            "_id_": 81,
+                                            "_type": "Debug"
+                                        },
+                                        "type": {
+                                            "_id_": 82,
+                                            "_type": "String",
+                                            "value_": "subs"
+                                        },
+                                        "onSuccess": {
+                                            "_id_": 83,
+                                            "_type": "Sequence",
+                                            "list_": [
+                                                {
+                                                    "_id_": 84,
+                                                    "_type": "DispatchEvent",
+                                                    "debug": {
+                                                        "_id_": 85,
+                                                        "_type": "Debug"
+                                                    },
+                                                    "data": {
+                                                        "_id_": 86,
+                                                        "_type": "LocalVariable.Get",
+                                                        "name": {
+                                                            "_id_": 87,
+                                                            "_type": "String",
+                                                            "value_": "data"
+                                                        }
+                                                    },
+                                                    "name": {
+                                                        "_id_": 88,
+                                                        "_type": "String",
+                                                        "value_": "update_subs"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "_id_": 89,
+                                        "_type": "Billing.GetPurchases",
+                                        "debug": {
+                                            "_id_": 90,
+                                            "_type": "Debug"
+                                        },
+                                        "type": {
+                                            "_id_": 91,
+                                            "_type": "String",
+                                            "value_": "inapp"
+                                        },
+                                        "onSuccess": {
+                                            "_id_": 92,
+                                            "_type": "Sequence",
+                                            "list_": [
+                                                {
+                                                    "_id_": 93,
+                                                    "_type": "DispatchEvent",
+                                                    "debug": {
+                                                        "_id_": 94,
+                                                        "_type": "Debug"
+                                                    },
+                                                    "data": {
+                                                        "_id_": 95,
+                                                        "_type": "LocalVariable.Get",
+                                                        "name": {
+                                                            "_id_": 96,
+                                                            "_type": "String",
+                                                            "value_": "data"
+                                                        }
+                                                    },
+                                                    "name": {
+                                                        "_id_": 97,
+                                                        "_type": "String",
+                                                        "value_": "update_inapp"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "_id_": 98,
+                            "_type": "Activity.OnResume",
+                            "action": {
+                                "_id_": 99,
+                                "_type": "Sequence",
+                                "list_": [
+                                    {
+                                        "_id_": 100,
+                                        "_type": "Call",
+                                        "name": {
+                                            "_id_": 101,
+                                            "_type": "String",
+                                            "value_": "getPurchases"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "theme": {
+                    "_id_": 102,
+                    "_type": "Theme.DayNight"
+                },
+                "contentView": {
+                    "_id_": 103,
+                    "_type": "ScrollView",
+                    "id": {
+                        "_id_": 104,
+                        "_type": "String",
+                        "value_": ""
+                    },
+                    "views": {
+                        "_id_": 105,
+                        "_type": "ViewList",
+                        "list_": [
+                            {
+                                "_id_": 106,
+                                "_type": "LinearLayout",
+                                "id": {
+                                    "_id_": 107,
+                                    "_type": "String",
+                                    "value_": ""
+                                },
+                                "views": {
+                                    "_id_": 108,
+                                    "_type": "ViewList",
+                                    "list_": [
+                                        {
+                                            "_id_": 109,
+                                            "_type": "LinearLayout",
+                                            "id": {
+                                                "_id_": 110,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "views": {
+                                                "_id_": 111,
+                                                "_type": "ViewList",
+                                                "list_": [
+                                                    {
+                                                        "_id_": 112,
+                                                        "_type": "TextView",
+                                                        "id": {
+                                                            "_id_": 113,
+                                                            "_type": "String",
+                                                            "value_": ""
+                                                        },
+                                                        "android:layout_width": {
+                                                            "_id_": 114,
+                                                            "_type": "View.SpecialDimension",
+                                                            "value_": "wrap_content"
+                                                        },
+                                                        "android:layout_height": {
+                                                            "_id_": 115,
+                                                            "_type": "View.SpecialDimension",
+                                                            "value_": "wrap_content"
+                                                        },
+                                                        "android:textSize": {
+                                                            "_id_": 116,
+                                                            "_type": "Dimension",
+                                                            "unit": {
+                                                                "_id_": 117,
+                                                                "_type": "DimensionUnit",
+                                                                "value_": "sp"
+                                                            },
+                                                            "value": {
+                                                                "_id_": 118,
+                                                                "_type": "Float",
+                                                                "value_": 15
+                                                            }
+                                                        },
+                                                        "android:text": {
+                                                            "_id_": 119,
+                                                            "_type": "String",
+                                                            "value_": "Product Type"
+                                                        },
+                                                        "android:gravity": {
+                                                            "_id_": 120,
+                                                            "_type": "Gravity",
+                                                            "value_": "left"
+                                                        }
+                                                    },
+                                                    {
+                                                        "_id_": 121,
+                                                        "_type": "RadioGroup",
+                                                        "id": {
+                                                            "_id_": 122,
+                                                            "_type": "String",
+                                                            "value_": "productType"
+                                                        },
+                                                        "views": {
+                                                            "_id_": 123,
+                                                            "_type": "ViewList",
+                                                            "list_": [
+                                                                {
+                                                                    "_id_": 124,
+                                                                    "_type": "RadioButton",
+                                                                    "id": {
+                                                                        "_id_": 125,
+                                                                        "_type": "String",
+                                                                        "value_": "inapp"
+                                                                    },
+                                                                    "onCheckedChange": {
+                                                                        "_id_": 126,
+                                                                        "_type": "CheckValue",
+                                                                        "onTrue": {
+                                                                            "_id_": 127,
+                                                                            "_type": "TextView.SetText",
+                                                                            "view": {
+                                                                                "_id_": 128,
+                                                                                "_type": "View.Reference",
+                                                                                "ref": {
+                                                                                    "_id_": 129,
+                                                                                    "_type": "String",
+                                                                                    "value_": "@id\/productID"
+                                                                                }
+                                                                            },
+                                                                            "text": {
+                                                                                "_id_": 130,
+                                                                                "_type": "String",
+                                                                                "value_": "test2"
+                                                                            }
+                                                                        },
+                                                                        "value": {
+                                                                            "_id_": 131,
+                                                                            "_type": "Expression",
+                                                                            "text": {
+                                                                                "_id_": 132,
+                                                                                "_type": "String",
+                                                                                "value_": "isChecked"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "android:text": {
+                                                                        "_id_": 133,
+                                                                        "_type": "String",
+                                                                        "value_": "inapp"
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "_id_": 134,
+                                                                    "_type": "RadioButton",
+                                                                    "id": {
+                                                                        "_id_": 135,
+                                                                        "_type": "String",
+                                                                        "value_": "subs"
+                                                                    },
+                                                                    "onCheckedChange": {
+                                                                        "_id_": 136,
+                                                                        "_type": "CheckValue",
+                                                                        "onTrue": {
+                                                                            "_id_": 137,
+                                                                            "_type": "TextView.SetText",
+                                                                            "view": {
+                                                                                "_id_": 138,
+                                                                                "_type": "View.Reference",
+                                                                                "ref": {
+                                                                                    "_id_": 139,
+                                                                                    "_type": "String",
+                                                                                    "value_": "@id\/productID"
+                                                                                }
+                                                                            },
+                                                                            "text": {
+                                                                                "_id_": 140,
+                                                                                "_type": "String",
+                                                                                "value_": "test1"
+                                                                            }
+                                                                        },
+                                                                        "value": {
+                                                                            "_id_": 141,
+                                                                            "_type": "Expression",
+                                                                            "text": {
+                                                                                "_id_": 142,
+                                                                                "_type": "String",
+                                                                                "value_": "isChecked"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "android:text": {
+                                                                        "_id_": 143,
+                                                                        "_type": "String",
+                                                                        "value_": "subs"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "android:layout_height": {
+                                                            "_id_": 1203,
+                                                            "_type": "View.SpecialDimension",
+                                                            "value_": "wrap_content"
+                                                        },
+                                                        "android:gravity": {
+                                                            "_id_": 144,
+                                                            "_type": "Gravity",
+                                                            "value_": "left"
+                                                        },
+                                                        "android:orientation": {
+                                                            "_id_": 145,
+                                                            "_type": "Orientation",
+                                                            "value_": "horizontal"
+                                                        },
+                                                        "android:checkedButton": {
+                                                            "_id_": 146,
+                                                            "_type": "IdReference",
+                                                            "ref": {
+                                                                "_id_": 147,
+                                                                "_type": "String",
+                                                                "value_": "@id\/subs"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 801,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "wrap_content"
+                                            },
+                                            "android:layout_marginTop": {
+                                                "_id_": 148,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 149,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 150,
+                                                    "_type": "Float",
+                                                    "value_": 10
+                                                }
+                                            },
+                                            "android:gravity": {
+                                                "_id_": 151,
+                                                "_type": "Gravity",
+                                                "value_": "left|center_vertical"
+                                            },
+                                            "android:orientation": {
+                                                "_id_": 152,
+                                                "_type": "Orientation",
+                                                "value_": "horizontal"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 153,
+                                            "_type": "LinearLayout",
+                                            "id": {
+                                                "_id_": 154,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "views": {
+                                                "_id_": 155,
+                                                "_type": "ViewList",
+                                                "list_": [
+                                                    {
+                                                        "_id_": 156,
+                                                        "_type": "TextView",
+                                                        "id": {
+                                                            "_id_": 157,
+                                                            "_type": "String",
+                                                            "value_": ""
+                                                        },
+                                                        "android:layout_width": {
+                                                            "_id_": 158,
+                                                            "_type": "View.SpecialDimension",
+                                                            "value_": "wrap_content"
+                                                        },
+                                                        "android:layout_height": {
+                                                            "_id_": 159,
+                                                            "_type": "View.SpecialDimension",
+                                                            "value_": "wrap_content"
+                                                        },
+                                                        "android:textSize": {
+                                                            "_id_": 160,
+                                                            "_type": "Dimension",
+                                                            "unit": {
+                                                                "_id_": 161,
+                                                                "_type": "DimensionUnit",
+                                                                "value_": "sp"
+                                                            },
+                                                            "value": {
+                                                                "_id_": 162,
+                                                                "_type": "Float",
+                                                                "value_": 15
+                                                            }
+                                                        },
+                                                        "android:text": {
+                                                            "_id_": 163,
+                                                            "_type": "String",
+                                                            "value_": "Product ID"
+                                                        },
+                                                        "android:gravity": {
+                                                            "_id_": 164,
+                                                            "_type": "Gravity",
+                                                            "value_": "left"
+                                                        }
+                                                    },
+                                                    {
+                                                        "_id_": 165,
+                                                        "_type": "EditText",
+                                                        "id": {
+                                                            "_id_": 166,
+                                                            "_type": "String",
+                                                            "value_": "productID"
+                                                        },
+                                                        "onTextChange": {
+                                                            "_id_": 167,
+                                                            "_type": "Sequence",
+                                                            "list_": [
+                                                                {
+                                                                    "_id_": 168,
+                                                                    "_type": "CheckValue",
+                                                                    "onOther": {
+                                                                        "_id_": 169,
+                                                                        "_type": "View.Disable",
+                                                                        "view": {
+                                                                            "_id_": 170,
+                                                                            "_type": "IdReference",
+                                                                            "ref": {
+                                                                                "_id_": 171,
+                                                                                "_type": "String",
+                                                                                "value_": "@id\/retrieve"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "onNonEmptyString": {
+                                                                        "_id_": 172,
+                                                                        "_type": "View.Enable",
+                                                                        "view": {
+                                                                            "_id_": 173,
+                                                                            "_type": "IdReference",
+                                                                            "ref": {
+                                                                                "_id_": 174,
+                                                                                "_type": "String",
+                                                                                "value_": "@id\/retrieve"
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "value": {
+                                                                        "_id_": 175,
+                                                                        "_type": "TextView.GetText",
+                                                                        "view": {
+                                                                            "_id_": 176,
+                                                                            "_type": "IdReference",
+                                                                            "ref": {
+                                                                                "_id_": 177,
+                                                                                "_type": "String",
+                                                                                "value_": "@id\/productID"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        },
+                                                        "android:layout_width": {
+                                                            "_id_": 178,
+                                                            "_type": "Dimension",
+                                                            "unit": {
+                                                                "_id_": 179,
+                                                                "_type": "DimensionUnit",
+                                                                "value_": "dp"
+                                                            },
+                                                            "value": {
+                                                                "_id_": 180,
+                                                                "_type": "Float",
+                                                                "value_": 200
+                                                            }
+                                                        },
+                                                        "android:inputType": {
+                                                            "_id_": 181,
+                                                            "_type": "TextView.InputType",
+                                                            "value_": "textNoSuggestions"
+                                                        },
+                                                        "android:layout_height": {
+                                                            "_id_": 182,
+                                                            "_type": "View.SpecialDimension",
+                                                            "value_": "wrap_content"
+                                                        },
+                                                        "android:singleLine": {
+                                                            "_id_": 183,
+                                                            "_type": "Boolean",
+                                                            "value_": true
+                                                        },
+                                                        "android:editable": {
+                                                            "_id_": 184,
+                                                            "_type": "Boolean",
+                                                            "value_": true
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "android:gravity": {
+                                                "_id_": 185,
+                                                "_type": "Gravity",
+                                                "value_": "left"
+                                            },
+                                            "android:orientation": {
+                                                "_id_": 186,
+                                                "_type": "Orientation",
+                                                "value_": "horizontal"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 187,
+                                            "_type": "Button",
+                                            "onClick": {
+                                                "_id_": 188,
+                                                "_type": "Call",
+                                                "name": {
+                                                    "_id_": 189,
+                                                    "_type": "String",
+                                                    "value_": "getProductInfo"
+                                                }
+                                            },
+                                            "id": {
+                                                "_id_": 190,
+                                                "_type": "String",
+                                                "value_": "retrieve"
+                                            },
+                                            "enabledValue": {
+                                                "_id_": 191,
+                                                "_type": "False"
+                                            },
+                                            "android:text": {
+                                                "_id_": 192,
+                                                "_type": "String",
+                                                "value_": "Retrieve"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 193,
+                                            "_type": "TextView",
+                                            "id": {
+                                                "_id_": 194,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "android:layout_width": {
+                                                "_id_": 195,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "match_parent"
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 196,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "wrap_content"
+                                            },
+                                            "android:textSize": {
+                                                "_id_": 197,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 198,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "sp"
+                                                },
+                                                "value": {
+                                                    "_id_": 199,
+                                                    "_type": "Float",
+                                                    "value_": 15
+                                                }
+                                            },
+                                            "android:text": {
+                                                "_id_": 200,
+                                                "_type": "String",
+                                                "value_": "Product Info (JSON)"
+                                            },
+                                            "android:gravity": {
+                                                "_id_": 201,
+                                                "_type": "Gravity",
+                                                "value_": "left"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 202,
+                                            "_type": "TextView",
+                                            "visibilityValue": {
+                                                "_id_": 203,
+                                                "_type": "CheckValue",
+                                                "onOther": {
+                                                    "_id_": 204,
+                                                    "_type": "True"
+                                                },
+                                                "onNonEmptyString": {
+                                                    "_id_": 205,
+                                                    "_type": "False"
+                                                },
+                                                "value": {
+                                                    "_id_": 206,
+                                                    "_type": "Variable.Get",
+                                                    "name": {
+                                                        "_id_": 207,
+                                                        "_type": "String",
+                                                        "value_": "jsonData"
+                                                    }
+                                                }
+                                            },
+                                            "id": {
+                                                "_id_": 208,
+                                                "_type": "String",
+                                                "value_": "productMessage"
+                                            },
+                                            "android:layout_width": {
+                                                "_id_": 209,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "match_parent"
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 210,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 211,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 212,
+                                                    "_type": "Float",
+                                                    "value_": 100
+                                                }
+                                            },
+                                            "android:textSize": {
+                                                "_id_": 213,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 214,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "sp"
+                                                },
+                                                "value": {
+                                                    "_id_": 215,
+                                                    "_type": "Float",
+                                                    "value_": 15
+                                                }
+                                            },
+                                            "android:gravity": {
+                                                "_id_": 216,
+                                                "_type": "Gravity",
+                                                "value_": "center"
+                                            },
+                                            "android:textColor": {
+                                                "_id_": 217,
+                                                "_type": "Color",
+                                                "color_": -65536
+                                            }
+                                        },
+                                        {
+                                            "_id_": 218,
+                                            "_type": "TextView",
+                                            "visibilityValue": {
+                                                "_id_": 219,
+                                                "_type": "CheckValue",
+                                                "onOther": {
+                                                    "_id_": 220,
+                                                    "_type": "False"
+                                                },
+                                                "onNonEmptyString": {
+                                                    "_id_": 221,
+                                                    "_type": "True"
+                                                },
+                                                "value": {
+                                                    "_id_": 222,
+                                                    "_type": "Variable.Get",
+                                                    "name": {
+                                                        "_id_": 223,
+                                                        "_type": "String",
+                                                        "value_": "jsonData"
+                                                    }
+                                                }
+                                            },
+                                            "id": {
+                                                "_id_": 224,
+                                                "_type": "String",
+                                                "value_": "json"
+                                            },
+                                            "textValue": {
+                                                "_id_": 225,
+                                                "_type": "Variable.Get",
+                                                "name": {
+                                                    "_id_": 226,
+                                                    "_type": "String",
+                                                    "value_": "jsonData"
+                                                }
+                                            },
+                                            "android:layout_width": {
+                                                "_id_": 227,
+                                                "_type": "String",
+                                                "value_": "match_parent"
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 228,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "wrap_content"
+                                            },
+                                            "android:textSize": {
+                                                "_id_": 229,
+                                                "_type": "String",
+                                                "value_": "14sp"
+                                            },
+                                            "android:padding": {
+                                                "_id_": 230,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 231,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 232,
+                                                    "_type": "Float",
+                                                    "value_": 4
+                                                }
+                                            },
+                                            "android:singleLine": {
+                                                "_id_": 233,
+                                                "_type": "Boolean",
+                                                "value_": false
+                                            },
+                                            "android:visibility": {
+                                                "_id_": 234,
+                                                "_type": "View.Visibility",
+                                                "value_": "gone"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 235,
+                                            "_type": "Button",
+                                            "onClick": {
+                                                "_id_": 236,
+                                                "_type": "Call",
+                                                "name": {
+                                                    "_id_": 237,
+                                                    "_type": "String",
+                                                    "value_": "buyProduct"
+                                                }
+                                            },
+                                            "id": {
+                                                "_id_": 238,
+                                                "_type": "String",
+                                                "value_": "buy"
+                                            },
+                                            "enabledValue": {
+                                                "_id_": 239,
+                                                "_type": "CheckValue",
+                                                "onOther": {
+                                                    "_id_": 240,
+                                                    "_type": "False"
+                                                },
+                                                "onNonEmptyString": {
+                                                    "_id_": 241,
+                                                    "_type": "True"
+                                                },
+                                                "value": {
+                                                    "_id_": 242,
+                                                    "_type": "Variable.Get",
+                                                    "name": {
+                                                        "_id_": 243,
+                                                        "_type": "String",
+                                                        "value_": "jsonData"
+                                                    }
+                                                }
+                                            },
+                                            "android:text": {
+                                                "_id_": 244,
+                                                "_type": "String",
+                                                "value_": "Buy"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 245,
+                                            "_type": "View",
+                                            "id": {
+                                                "_id_": 246,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "android:background": {
+                                                "_id_": 247,
+                                                "_type": "Color",
+                                                "color_": -8355712
+                                            },
+                                            "android:layout_width": {
+                                                "_id_": 248,
+                                                "_type": "String",
+                                                "value_": "match_parent"
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 249,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 250,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 251,
+                                                    "_type": "Float",
+                                                    "value_": 2
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "_id_": 252,
+                                            "_type": "TextView",
+                                            "id": {
+                                                "_id_": 253,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "android:layout_width": {
+                                                "_id_": 254,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "match_parent"
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 255,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "wrap_content"
+                                            },
+                                            "android:textSize": {
+                                                "_id_": 256,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 257,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "sp"
+                                                },
+                                                "value": {
+                                                    "_id_": 258,
+                                                    "_type": "Float",
+                                                    "value_": 15
+                                                }
+                                            },
+                                            "android:text": {
+                                                "_id_": 259,
+                                                "_type": "String",
+                                                "value_": "Purchased Subscriptions"
+                                            },
+                                            "android:layout_marginTop": {
+                                                "_id_": 260,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 261,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 262,
+                                                    "_type": "Float",
+                                                    "value_": 10
+                                                }
+                                            },
+                                            "android:gravity": {
+                                                "_id_": 263,
+                                                "_type": "Gravity",
+                                                "value_": "left"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 264,
+                                            "_type": "ListView",
+                                            "id": {
+                                                "_id_": 265,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "adapter": {
+                                                "_id_": 266,
+                                                "_type": "ListView.Adapter",
+                                                "dataModifiedEvent": {
+                                                    "_id_": 267,
+                                                    "_type": "String",
+                                                    "value_": "update_subs"
+                                                },
+                                                "layout": {
+                                                    "_id_": 268,
+                                                    "_type": "TextView",
+                                                    "id": {
+                                                        "_id_": 269,
+                                                        "_type": "String",
+                                                        "value_": "subsText"
+                                                    },
+                                                    "android:textSize": {
+                                                        "_id_": 270,
+                                                        "_type": "String",
+                                                        "value_": "14sp"
+                                                    },
+                                                    "android:padding": {
+                                                        "_id_": 271,
+                                                        "_type": "Dimension",
+                                                        "unit": {
+                                                            "_id_": 272,
+                                                            "_type": "DimensionUnit",
+                                                            "value_": "dp"
+                                                        },
+                                                        "value": {
+                                                            "_id_": 273,
+                                                            "_type": "Float",
+                                                            "value_": 4
+                                                        }
+                                                    }
+                                                },
+                                                "populate": {
+                                                    "_id_": 274,
+                                                    "_type": "View.PopulateInstructions",
+                                                    "list_": [
+                                                        {
+                                                            "_id_": 275,
+                                                            "_type": "View.PopulateInstruction",
+                                                            "view": {
+                                                                "_id_": 276,
+                                                                "_type": "String",
+                                                                "value_": "subsText"
+                                                            },
+                                                            "property": {
+                                                                "_id_": 277,
+                                                                "_type": "String",
+                                                                "value_": "text"
+                                                            },
+                                                            "value": {
+                                                                "_id_": 278,
+                                                                "_type": "Field.Get",
+                                                                "name": {
+                                                                    "_id_": 279,
+                                                                    "_type": "String",
+                                                                    "value_": "orderId"
+                                                                },
+                                                                "object": {
+                                                                    "_id_": 280,
+                                                                    "_type": "ListView.AdapterData"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "elementType_": "View.PopulateInstruction"
+                                                },
+                                                "debug": {
+                                                    "_id_": 281,
+                                                    "_type": "Debug"
+                                                }
+                                            },
+                                            "onItemClick": {
+                                                "_id_": 282,
+                                                "_type": "Sequence",
+                                                "list_": [
+                                                    {
+                                                        "_id_": 283,
+                                                        "_type": "Dialog.Show",
+                                                        "dialog": {
+                                                            "_id_": 284,
+                                                            "_type": "String",
+                                                            "value_": "ShowPurchase"
+                                                        },
+                                                        "argument": {
+                                                            "_id_": 285,
+                                                            "_type": "Expression",
+                                                            "text": {
+                                                                "_id_": 286,
+                                                                "_type": "String",
+                                                                "value_": "JSON.stringify(item)"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 287,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 288,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 289,
+                                                    "_type": "Float",
+                                                    "value_": 100
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "_id_": 290,
+                                            "_type": "TextView",
+                                            "id": {
+                                                "_id_": 291,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "android:layout_width": {
+                                                "_id_": 292,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "match_parent"
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 293,
+                                                "_type": "View.SpecialDimension",
+                                                "value_": "wrap_content"
+                                            },
+                                            "android:textSize": {
+                                                "_id_": 294,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 295,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "sp"
+                                                },
+                                                "value": {
+                                                    "_id_": 296,
+                                                    "_type": "Float",
+                                                    "value_": 15
+                                                }
+                                            },
+                                            "android:text": {
+                                                "_id_": 297,
+                                                "_type": "String",
+                                                "value_": "Purchased In-App Products"
+                                            },
+                                            "android:layout_marginTop": {
+                                                "_id_": 298,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 299,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 300,
+                                                    "_type": "Float",
+                                                    "value_": 10
+                                                }
+                                            },
+                                            "android:gravity": {
+                                                "_id_": 301,
+                                                "_type": "Gravity",
+                                                "value_": "left"
+                                            }
+                                        },
+                                        {
+                                            "_id_": 302,
+                                            "_type": "ListView",
+                                            "id": {
+                                                "_id_": 303,
+                                                "_type": "String",
+                                                "value_": ""
+                                            },
+                                            "adapter": {
+                                                "_id_": 304,
+                                                "_type": "ListView.Adapter",
+                                                "dataModifiedEvent": {
+                                                    "_id_": 305,
+                                                    "_type": "String",
+                                                    "value_": "update_inapp"
+                                                },
+                                                "layout": {
+                                                    "_id_": 306,
+                                                    "_type": "TextView",
+                                                    "id": {
+                                                        "_id_": 307,
+                                                        "_type": "String",
+                                                        "value_": "inappText"
+                                                    },
+                                                    "android:textSize": {
+                                                        "_id_": 308,
+                                                        "_type": "String",
+                                                        "value_": "14sp"
+                                                    },
+                                                    "android:padding": {
+                                                        "_id_": 309,
+                                                        "_type": "Dimension",
+                                                        "unit": {
+                                                            "_id_": 310,
+                                                            "_type": "DimensionUnit",
+                                                            "value_": "dp"
+                                                        },
+                                                        "value": {
+                                                            "_id_": 311,
+                                                            "_type": "Float",
+                                                            "value_": 4
+                                                        }
+                                                    }
+                                                },
+                                                "populate": {
+                                                    "_id_": 312,
+                                                    "_type": "View.PopulateInstructions",
+                                                    "list_": [
+                                                        {
+                                                            "_id_": 313,
+                                                            "_type": "View.PopulateInstruction",
+                                                            "view": {
+                                                                "_id_": 314,
+                                                                "_type": "String",
+                                                                "value_": "inappText"
+                                                            },
+                                                            "property": {
+                                                                "_id_": 315,
+                                                                "_type": "String",
+                                                                "value_": "text"
+                                                            },
+                                                            "value": {
+                                                                "_id_": 316,
+                                                                "_type": "Field.Get",
+                                                                "name": {
+                                                                    "_id_": 317,
+                                                                    "_type": "String",
+                                                                    "value_": "orderId"
+                                                                },
+                                                                "object": {
+                                                                    "_id_": 318,
+                                                                    "_type": "ListView.AdapterData"
+                                                                }
+                                                            }
+                                                        }
+                                                    ],
+                                                    "elementType_": "View.PopulateInstruction"
+                                                },
+                                                "debug": {
+                                                    "_id_": 319,
+                                                    "_type": "Debug"
+                                                }
+                                            },
+                                            "onItemClick": {
+                                                "_id_": 320,
+                                                "_type": "Sequence",
+                                                "list_": [
+                                                    {
+                                                        "_id_": 321,
+                                                        "_type": "Dialog.Show",
+                                                        "dialog": {
+                                                            "_id_": 322,
+                                                            "_type": "String",
+                                                            "value_": "ShowPurchase"
+                                                        },
+                                                        "argument": {
+                                                            "_id_": 323,
+                                                            "_type": "Expression",
+                                                            "text": {
+                                                                "_id_": 324,
+                                                                "_type": "String",
+                                                                "value_": "JSON.stringify(item)"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "android:layout_height": {
+                                                "_id_": 325,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 326,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 327,
+                                                    "_type": "Float",
+                                                    "value_": 100
+                                                }
+                                            },
+                                            "android:layout_marginBottom": {
+                                                "_id_": 328,
+                                                "_type": "Dimension",
+                                                "unit": {
+                                                    "_id_": 329,
+                                                    "_type": "DimensionUnit",
+                                                    "value_": "dp"
+                                                },
+                                                "value": {
+                                                    "_id_": 330,
+                                                    "_type": "Float",
+                                                    "value_": 10
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "android:gravity": {
+                                    "_id_": 331,
+                                    "_type": "Gravity",
+                                    "value_": "left"
+                                },
+                                "android:paddingHorizontal": {
+                                    "_id_": 332,
+                                    "_type": "Dimension",
+                                    "unit": {
+                                        "_id_": 333,
+                                        "_type": "DimensionUnit",
+                                        "value_": "dp"
+                                    },
+                                    "value": {
+                                        "_id_": 334,
+                                        "_type": "Float",
+                                        "value_": 10
+                                    }
+                                },
+                                "android:orientation": {
+                                    "_id_": 335,
+                                    "_type": "Orientation",
+                                    "value_": "vertical"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "toolbar": {
+                    "_id_": 336,
+                    "_type": "Toolbar",
+                    "id": {
+                        "_id_": 337,
+                        "_type": "String",
+                        "value_": ""
+                    }
+                },
+                "name": {
+                    "_id_": 338,
+                    "_type": "String",
+                    "value_": "Main"
+                },
+                "launcher": {
+                    "_id_": 339,
+                    "_type": "Activity.Launcher"
+                }
+            },
+            {
+                "_id_": 340,
+                "_type": "StyleResource",
+                "name": {
+                    "_id_": 341,
+                    "_type": "String",
+                    "value_": "dialog"
+                },
+                "style": {
+                    "_id_": 342,
+                    "_type": "Style",
+                    "parent": {
+                        "_id_": 343,
+                        "_type": "StyleReference",
+                        "ref": {
+                            "_id_": 344,
+                            "_type": "String",
+                            "value_": "@style\/Theme.AppCompat.Light.Dialog.Alert"
+                        }
+                    },
+                    "dialogCornerRadius": {
+                        "_id_": 345,
+                        "_type": "Dimension",
+                        "unit": {
+                            "_id_": 346,
+                            "_type": "DimensionUnit",
+                            "value_": "dp"
+                        },
+                        "value": {
+                            "_id_": 347,
+                            "_type": "Float",
+                            "value_": 20
+                        }
+                    }
+                }
+            },
+            {
+                "_id_": 348,
+                "_type": "Dialog",
+                "debug": {
+                    "_id_": 349,
+                    "_type": "Debug"
+                },
+                "title": {
+                    "_id_": 350,
+                    "_type": "String",
+                    "value_": "Purchase"
+                },
+                "view": {
+                    "_id_": 351,
+                    "_type": "EditText",
+                    "id": {
+                        "_id_": 352,
+                        "_type": "String",
+                        "value_": "json"
+                    },
+                    "debug": {
+                        "_id_": 353,
+                        "_type": "Debug"
+                    },
+                    "textValue": {
+                        "_id_": 354,
+                        "_type": "Dialog.Argument"
+                    },
+                    "android:background": {
+                        "_id_": 355,
+                        "_type": "Color",
+                        "color_": -2171170
+                    },
+                    "android:lines": {
+                        "_id_": 356,
+                        "_type": "Integer",
+                        "value_": 8
+                    },
+                    "android:minWidth": {
+                        "_id_": 357,
+                        "_type": "String",
+                        "value_": "300dp"
+                    },
+                    "android:textSize": {
+                        "_id_": 358,
+                        "_type": "String",
+                        "value_": "14sp"
+                    },
+                    "android:padding": {
+                        "_id_": 359,
+                        "_type": "Dimension",
+                        "unit": {
+                            "_id_": 360,
+                            "_type": "DimensionUnit",
+                            "value_": "dp"
+                        },
+                        "value": {
+                            "_id_": 361,
+                            "_type": "Float",
+                            "value_": 4
+                        }
+                    },
+                    "android:singleLine": {
+                        "_id_": 362,
+                        "_type": "Boolean",
+                        "value_": false
+                    },
+                    "android:editable": {
+                        "_id_": 363,
+                        "_type": "Boolean",
+                        "value_": false
+                    }
+                },
+                "name": {
+                    "_id_": 364,
+                    "_type": "String",
+                    "value_": "ShowPurchase"
+                },
+                "positiveButton": {
+                    "_id_": 365,
+                    "_type": "Dialog.Button",
+                    "text": {
+                        "_id_": 366,
+                        "_type": "String",
+                        "value_": "OK"
+                    }
+                },
+                "neutralButton": {
+                    "_id_": 367,
+                    "_type": "Dialog.Button",
+                    "onClick": {
+                        "_id_": 368,
+                        "_type": "Sequence",
+                        "list_": [
+                            {
+                                "_id_": 369,
+                                "_type": "LocalVariable",
+                                "init": {
+                                    "_id_": 370,
+                                    "_type": "Dialog.Argument"
+                                },
+                                "name": {
+                                    "_id_": 371,
+                                    "_type": "String",
+                                    "value_": "json"
+                                }
+                            },
+                            {
+                                "_id_": 372,
+                                "_type": "Billing.Consume",
+                                "debug": {
+                                    "_id_": 373,
+                                    "_type": "Debug"
+                                },
+                                "onSuccess": {
+                                    "_id_": 374,
+                                    "_type": "Sequence",
+                                    "list_": [
+                                        {
+                                            "_id_": 375,
+                                            "_type": "Call",
+                                            "name": {
+                                                "_id_": 376,
+                                                "_type": "String",
+                                                "value_": "getPurchases"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "token": {
+                                    "_id_": 377,
+                                    "_type": "Expression",
+                                    "text": {
+                                        "_id_": 378,
+                                        "_type": "String",
+                                        "value_": "JSON.parse(json).purchaseToken"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "text": {
+                        "_id_": 379,
+                        "_type": "String",
+                        "value_": "Consume"
+                    }
+                },
+                "theme": {
+                    "_id_": 380,
+                    "_type": "StyleReference",
+                    "ref": {
+                        "_id_": 381,
+                        "_type": "String",
+                        "value_": "@style\/dialog"
+                    }
+                }
+            }
+        ]
+    },
+    "settings": {
+        "_id_": 382,
+        "_type": "App.Settings",
+        "debugBuild": {
+            "_id_": 383,
+            "_type": "App.Settings.DebugBuild",
+            "includeAssets": {
+                "_id_": 384,
+                "_type": "Boolean",
+                "value_": true
+            }
+        },
+        "releaseBuild": {
+            "_id_": 385,
+            "_type": "App.Settings.ReleaseBuild"
+        }
+    },
+    "packaging": {
+        "_id_": 386,
+        "_type": "App.Packaging",
+        "icon": {
+            "_id_": 387,
+            "_type": "AdaptiveIcon",
+            "background": {
+                "_id_": 388,
+                "_type": "Color",
+                "color_": -1
+            },
+            "foreground": {
+                "_id_": 389,
+                "_type": "DrawableReference",
+                "ref": {
+                    "_id_": 390,
+                    "_type": "String",
+                    "value_": "@drawable\/app_icon"
+                }
+            },
+            "legacyIcon": {
+                "_id_": 391,
+                "_type": "MipmapReference",
+                "ref": {
+                    "_id_": 392,
+                    "_type": "String",
+                    "value_": "@mipmap\/app_icon"
+                }
+            }
+        },
+        "targetSdk": {
+            "_id_": 393,
+            "_type": "Integer",
+            "value_": 34
+        },
+        "label": {
+            "_id_": 394,
+            "_type": "String",
+            "value_": "Billing Example"
+        },
+        "versionName": {
+            "_id_": 395,
+            "_type": "String",
+            "value_": "1.0"
+        },
+        "versionCode": {
+            "_id_": 396,
+            "_type": "Integer",
+            "value_": 1
+        },
+        "minSdk": {
+            "_id_": 397,
+            "_type": "Integer",
+            "value_": 24
+        },
+        "permissions": {
+            "_id_": 398,
+            "_type": "App.Permissions"
+        },
+        "packageName": {
+            "_id_": 399,
+            "_type": "String",
+            "value_": "com.aaappps.billing.example"
+        }
+    },
+    "comment": {
+        "_id_": 400,
+        "_type": "Comment",
+        "list_": [],
+        "text_": "For this example to work, you need: (1) change the package name; (2) publish it on Google Play; (3) set up subscriptions and\/or in-app products in the Google Play console.\n"
+    },
+    "_abVer": 229
+}
